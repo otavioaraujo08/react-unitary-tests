@@ -1,9 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import App from "./App";
 
-test("sum", () => {
-  render(<App />);
+describe("App component", () => {
+  it("Should render list items", () => {
+    render(<App />);
 
-  expect(screen.getByText("Importante")).toBeTruthy();
-  expect(screen.getByText("Importante")).toHaveAttribute("class", "test");
+    expect(screen.getByText("Otávio")).toBeInTheDocument();
+    expect(screen.getByText("Matheus")).toBeInTheDocument();
+    expect(screen.getByText("Jhony")).toBeInTheDocument();
+  });
 });
