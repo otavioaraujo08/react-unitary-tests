@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { findByText, fireEvent, render, screen } from "@testing-library/react";
 import App from "./App";
 
 describe("App component", () => {
@@ -10,13 +10,15 @@ describe("App component", () => {
     expect(screen.getByText("Jhony")).toBeInTheDocument();
   });
 
-  it("Should be able to add a new item to the list", () => {
+  it("Should be able to add a new item to the list", async () => {
     render(<App />);
 
+    const inputElement = screen.getByPlaceholderText("Digite um nome");
     const addButton = screen.getByText("Adicionar");
 
+    fireEvent.change(inputElement, { target: { value: "Novo" } });
     fireEvent.click(addButton);
 
-    expect(screen.getByText("Novo")).toBeInTheDocument();
+    expect(await screen.findByText("Novo")).toBeInTheDocument();
   });
 });
